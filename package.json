@@ -1,0 +1,31 @@
+{
+  "name": "enb-postcss",
+  "version": "0.0.1",
+  "description": "postCSS tech for enb",
+  "dependencies": {
+    "postcss": "^4.1.11"
+  },
+  "peerDependencies": {
+    "enb": ">=0.13.11 <1.0.0"
+  },
+  "devDependencies": {
+    "enb-validate-code": "0.0.1",
+    "jscs": "~1.4.5",
+    "jshint": "~2.5.1"
+  },
+  "main": "techs/css-postcss.js",
+  "scripts": {
+    "test": "npm run jshint && npm run jscs",
+    "jshint": "node_modules/.bin/jshint .",
+    "jscs": "node_modules/.bin/jscs -c node_modules/enb-validate-code/jscs.json techs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/enb-make/enb-autoprefixer.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theprotein/enb-postcss/issues"
+  },
+  "homepage": "https://github.com/theprotein/enb-postcss"
+}
