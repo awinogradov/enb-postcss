@@ -2,6 +2,10 @@ enb-postcss
 ===========
 
 Usage:
+```bash
+npm i --save-dev enb-postcss
+```
+
 ```js
 nodeConfig.addTech([
     [require('enb/techs/css'), { target : '?.pre.css' } ],
