@@ -8,9 +8,8 @@ npm i --save-dev enb-postcss
 
 ```js
 nodeConfig.addTech([
-    [require('enb/techs/css'), { target : '?.pre.css' } ],
     [require('enb-postcss/techs/enb-postcss'), {
-        sourceTarget : '?.pre.css',
+        sourcemap : true,
         plugins : [require('cssnext')()]
     } ],
 ]);

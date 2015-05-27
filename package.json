@@ -1,9 +1,18 @@
 {
   "name": "enb-postcss",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "postCSS tech for enb",
+  "keywords": [
+    "bem",
+    "enbplugin",
+    "postcss",
+    "postcss-runner",
+    "css"
+  ],
   "dependencies": {
-    "postcss": "^4.1.11"
+    "postcss": "^4.1.11",
+    "postcss-import": "^5.2.2",
+    "vow": "^0.4.9"
   },
   "peerDependencies": {
     "enb": ">=0.13.11 <1.0.0"
@@ -21,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/enb-make/enb-autoprefixer.git"
+    "url": "git://github.com/theprotein/enb-postcss.git"
   },
   "license": "MIT",
   "bugs": {
