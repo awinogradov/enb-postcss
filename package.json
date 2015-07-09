@@ -1,6 +1,6 @@
 {
   "name": "enb-postcss",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "postCSS tech for enb",
   "keywords": [
     "bem",
