@@ -8,7 +8,7 @@ module.exports = require('enb/techs/css').buildFlow()
     .target('target', '?.css')
     .defineOption('plugins')
     .defineOption('sourcemap', false)
-    .useFileList(['css'])
+    .useFileList(['css', 'post.css'])
     .builder(function(files) {
         var def = vow.defer(),
             _this = this,
