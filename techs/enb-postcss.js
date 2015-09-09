@@ -1,5 +1,5 @@
 var vow     = require('vow'),
-    path    = require('path'),
+    EOL     = require('os').EOL,
     postcss = require('postcss'),
     pimport = require('postcss-import');
 
@@ -7,15 +7,26 @@ module.exports = require('enb/techs/css').buildFlow()
     .name('enb-postcss')
     .target('target', '?.css')
     .defineOption('plugins')
+    .defineOption('comments', false)
     .defineOption('sourcemap', false)
     .useFileList(['css', 'post.css'])
     .builder(function(files) {
         var def = vow.defer(),
             _this = this,
-            dirname = _this.node.getDir(),
-            filename = path.join(dirname, _this._target),
+            dirname = this.node.getDir(),
+            filename = this.node.resolvePath(this._target),
             css = files.map(function(file) {
-                return '@import "' + path.relative(dirname, file.fullname) + '";';
+                var url = _this.node.relativePath(file.fullname),
+                    pre = '',
+                    post = '';
+
+                if (_this._comments) {
+                    pre = '/* ' + url + ':begin */' + EOL;
+                    post = '/* ' + url + ':end */' + EOL;
+                    return pre + '@import "' + url + '";' + EOL + post;
+                } else {
+                    return '@import "' + url + '";';
+                }
             }).join('\n'),
             output;
 
