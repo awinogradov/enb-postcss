@@ -10,12 +10,12 @@ module.exports = require('enb/techs/css').buildFlow()
     .defineOption('comments', false)
     .defineOption('sourcemap', false)
     .useFileList(['css', 'post.css'])
-    .builder(function(files) {
+    .builder(function (files) {
         var def = vow.defer(),
             _this = this,
             dirname = this.node.getDir(),
             filename = this.node.resolvePath(this._target),
-            css = files.map(function(file) {
+            css = files.map(function (file) {
                 var url = _this.node.relativePath(file.fullname),
                     pre = '',
                     post = '';
@@ -36,15 +36,15 @@ module.exports = require('enb/techs/css').buildFlow()
                 to: filename,
                 map: _this._sourcemap
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 if (error.name === 'CssSyntaxError') {
                     process.stderr.write(error.message + error.showSourceCode());
                 } else {
                     throw error;
                 }
             })
-            .then(function(result) {
-                result.warnings().forEach(function(warn) {
+            .then(function (result) {
+                result.warnings().forEach(function (warn) {
                     process.stderr.write(warn.toString());
                 });
 
