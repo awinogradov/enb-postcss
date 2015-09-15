@@ -1,0 +1,11 @@
+{
+    "excludeFiles": [
+        ".git/**",
+        "node_modules/**"
+    ],
+    "requireMultipleVarDecl": true,
+    "requireSpacesInFunction": {
+        "beforeOpeningRoundBrace": true,
+        "beforeOpeningCurlyBrace": true
+    }
+}

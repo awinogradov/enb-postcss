@@ -10,23 +10,22 @@
     "css"
   ],
   "dependencies": {
-    "postcss": "^4.1.11",
-    "postcss-import": "^5.2.2",
-    "vow": "^0.4.9"
+    "postcss": "^5.0.5",
+    "postcss-import": "^7.0.0",
+    "vow": "^0.4.10"
   },
   "peerDependencies": {
     "enb": ">=0.13.11 <1.0.0"
   },
   "devDependencies": {
-    "enb-validate-code": "0.0.1",
-    "jscs": "~1.4.5",
-    "jshint": "~2.5.1"
+    "jscs": "^2.1.1",
+    "jshint": "^2.8.0"
   },
   "main": "techs/css-postcss.js",
   "scripts": {
     "test": "npm run jshint && npm run jscs",
-    "jshint": "node_modules/.bin/jshint .",
-    "jscs": "node_modules/.bin/jscs -c node_modules/enb-validate-code/jscs.json techs"
+    "jshint": "jshint .",
+    "jscs": "jscs . -v"
   },
   "repository": {
     "type": "git",
