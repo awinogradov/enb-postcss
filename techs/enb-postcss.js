@@ -3,7 +3,7 @@ var vow     = require('vow'),
     postcss = require('postcss'),
     pimport = require('postcss-import');
 
-module.exports = require('enb/techs/css').buildFlow()
+module.exports = require('enb/lib/build-flow').create()
     .name('enb-postcss')
     .target('target', '?.css')
     .defineOption('plugins')
