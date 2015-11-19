@@ -1,9 +1,10 @@
-var vow     = require('vow'),
-    EOL     = require('os').EOL,
-    postcss = require('postcss'),
-    pimport = require('postcss-import');
+var vow       = require('vow'),
+    EOL       = require('os').EOL,
+    postcss   = require('postcss'),
+    pimport   = require('postcss-import'),
+    buildFlow = require('enb').buildFlow || require('enb/lib/build-flow');
 
-module.exports = require('enb/lib/build-flow').create()
+module.exports = buildFlow.create()
     .name('enb-postcss')
     .target('target', '?.css')
     .defineOption('plugins')
