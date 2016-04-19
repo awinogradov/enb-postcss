@@ -41,7 +41,7 @@ module.exports = buildFlow.create()
                 if (error.name === 'CssSyntaxError') {
                     process.stderr.write(error.message + error.showSourceCode());
                 } else {
-                    throw error;
+                    def.reject(error);
                 }
             })
             .then(function (result) {
