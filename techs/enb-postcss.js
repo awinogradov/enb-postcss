@@ -1,5 +1,6 @@
 var vow       = require('vow'),
     EOL       = require('os').EOL,
+    path      = require('path'),
     postcss   = require('postcss'),
     pimport   = require('postcss-import'),
     buildFlow = require('enb').buildFlow || require('enb/lib/build-flow');
@@ -16,8 +17,9 @@ module.exports = buildFlow.create()
             _this = this,
             dirname = this.node.getDir(),
             filename = this.node.resolvePath(this._target),
+            targetDir = path.dirname(filename),
             css = files.map(function (file) {
-                var url = _this.node.relativePath(file.fullname),
+                var url = path.relative(targetDir, file.fullname),
                     pre = '',
                     post = '';
 
