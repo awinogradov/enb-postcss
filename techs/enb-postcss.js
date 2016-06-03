@@ -9,6 +9,7 @@ module.exports = buildFlow.create()
     .name('enb-postcss')
     .target('target', '?.css')
     .defineOption('plugins')
+    .defineOptions('parser')
     .defineOption('comments', false)
     .defineOption('sourcemap', false)
     .useFileList(['css', 'post.css'])
@@ -33,7 +34,7 @@ module.exports = buildFlow.create()
             }).join('\n'),
             output;
 
-        output = postcss([pimport()].concat(_this._plugins))
+        output = postcss([pimport()].concat(_this._plugins), parser : _this._parser)
             .process(css, {
                 from: filename,
                 to: filename,
