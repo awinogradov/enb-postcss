@@ -11,6 +11,7 @@ module.exports = buildFlow.create()
     .defineOption('plugins')
     .defineOption('comments', false)
     .defineOption('sourcemap', false)
+    .useSourceFilename('source', '?.post.css')
     .useFileList(['css', 'post.css'])
     .builder(function (files) {
         var def = vow.defer(),
