@@ -9,10 +9,9 @@ module.exports = buildFlow.create()
     .name('enb-postcss')
     .target('target', '?.css')
     .defineOption('plugins')
-    .defineOptions('parser')
+    .defineOption('parser')
     .defineOption('comments', false)
     .defineOption('sourcemap', false)
-    .useSourceFilename('source', '?.post.css')
     .useFileList(['css', 'post.css'])
     .builder(function (files) {
         var def = vow.defer(),
@@ -35,11 +34,12 @@ module.exports = buildFlow.create()
             }).join('\n'),
             output;
 
-        output = postcss([pimport()].concat(_this._plugins), parser : _this._parser)
+        output = postcss([pimport()].concat(_this._plugins))
             .process(css, {
                 from: filename,
                 to: filename,
-                map: _this._sourcemap
+                map: _this._sourcemap,
+                parser: _this._parser
             })
             .catch(function (error) {
                 if (error.name === 'CssSyntaxError') {
