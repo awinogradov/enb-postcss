@@ -34,7 +34,7 @@ module.exports = buildFlow.create()
             }).join('\n'),
             output;
 
-        output = postcss([pimport()].concat(_this._plugins))
+        output = postcss([_this._pluginImport || pimport()].concat(_this._plugins))
             .process(css, {
                 from: filename,
                 to: filename,
