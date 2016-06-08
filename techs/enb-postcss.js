@@ -2,7 +2,6 @@ var vow       = require('vow'),
     EOL       = require('os').EOL,
     path      = require('path'),
     postcss   = require('postcss'),
-    pimport   = require('postcss-import'),
     buildFlow = require('enb').buildFlow || require('enb/lib/build-flow');
 
 module.exports = buildFlow.create()
@@ -34,7 +33,7 @@ module.exports = buildFlow.create()
             }).join('\n'),
             output;
 
-        output = postcss([pimport()].concat(_this._plugins))
+        output = postcss(_this._plugins)
             .process(css, {
                 from: filename,
                 to: filename,
