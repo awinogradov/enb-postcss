@@ -11,14 +11,25 @@ module.exports = buildFlow.create()
     .defineOption('parser')
     .defineOption('comments', false)
     .defineOption('sourcemap', false)
-    .useFileList(['css', 'post.css'])
+    .useFileList(['post.css', 'css'])
     .builder(function (files) {
         var def = vow.defer(),
             _this = this,
             dirname = this.node.getDir(),
             filename = this.node.resolvePath(this._target),
             targetDir = path.dirname(filename),
-            css = files.map(function (file) {
+            added = {},
+            css = files.filter(function (file) { // keep just first of b1.post.css and b1.css
+                var basename = path.join(path.dirname(file.fullname), file.name.substring(0, file.name.indexOf('.')));
+
+                if (added[basename]) {
+                    return false;
+                }
+
+                added[basename] = true;
+
+                return true;
+            }).map(function (file) {
                 var url = path.relative(targetDir, file.fullname),
                     pre = '',
                     post = '';
