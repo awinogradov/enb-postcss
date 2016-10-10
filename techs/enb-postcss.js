@@ -13,15 +13,15 @@ module.exports = buildFlow.create()
     .defineOption('sourcemap', false)
     .useFileList(['post.css', 'css'])
     .builder(function (files) {
-        var def = vow.defer(),
-            _this = this,
+        var _this = this,
             dirname = this.node.getDir(),
             filename = this.node.resolvePath(this._target),
             targetDir = path.dirname(filename),
             added = {},
             css = files.filter(function (file) { // keep just first of b1.post.css and b1.css
-                var filename = file.name.substring(0, file.name.indexOf('.'));
-                var ext = file.name.replace(filename, '').split('.').reverse();
+                var filename = file.name.substring(0, file.name.indexOf('.')),
+                    ext = file.name.replace(filename, '').split('.').reverse();
+
                 if(ext[1]) {
                     // alow multidotted extensions
                     filename += '.' + ext[1];
@@ -47,25 +47,24 @@ module.exports = buildFlow.create()
                 } else {
                     return '@import "' + url + '";';
                 }
-            }).join('\n'),
-            output;
+            }).join('\n');
 
-        output = postcss(_this._plugins)
+        return postcss(_this._plugins)
             .process(css, {
                 from: filename,
                 to: filename,
                 map: _this._sourcemap,
                 parser: _this._parser
             })
+            .then(function (result) {
+                return result.css;
+            })
             .catch(function (error) {
                 if (error.name === 'CssSyntaxError') {
                     process.stderr.write(error.message + error.showSourceCode());
                 } else {
-                    def.reject(error);
+                    throw error;
                 }
-            })
-            .then(def.resolve);
-
-        return def.promise();
+            });
     })
     .createTech();
