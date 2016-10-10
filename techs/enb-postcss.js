@@ -64,13 +64,7 @@ module.exports = buildFlow.create()
                     def.reject(error);
                 }
             })
-            .then(function (result) {
-                result.warnings().forEach(function (warn) {
-                    process.stderr.write(warn.toString());
-                });
-
-                def.resolve(result);
-            });
+            .then(def.resolve);
 
         return def.promise();
     })
