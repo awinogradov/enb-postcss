@@ -37,15 +37,16 @@ module.exports = buildFlow.create()
                 return true;
             }).map(function (file) {
                 var url = path.relative(targetDir, file.fullname),
+                    importState = _this.getImportState(file, url),
                     pre = '',
                     post = '';
 
                 if (_this._comments) {
                     pre = '/* ' + url + ':begin */' + EOL;
                     post = '/* ' + url + ':end */' + EOL;
-                    return pre + '@import "' + url + '";' + EOL + post;
+                    return pre + importState + EOL + post;
                 } else {
-                    return '@import "' + url + '";';
+                    return importState;
                 }
             }).join('\n');
 
@@ -66,5 +67,15 @@ module.exports = buildFlow.create()
                     throw error;
                 }
             });
+    })
+    .methods({
+        /**
+         * @param {Object} file
+         * @param {string} relativePath
+         * @return {string}
+         */
+        getImportState: function (file, relativePath) {
+            return '@import "' + relativePath + '";';
+        }
     })
     .createTech();
