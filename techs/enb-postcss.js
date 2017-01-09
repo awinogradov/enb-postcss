@@ -18,24 +18,7 @@ module.exports = buildFlow.create()
             filename = this.node.resolvePath(this._target),
             targetDir = path.dirname(filename),
             added = {},
-            css = files.filter(function (file) { // keep just first of b1.post.css and b1.css
-                var filename = file.name.substring(0, file.name.indexOf('.')),
-                    ext = file.name.replace(filename, '').split('.').reverse();
-
-                if(ext[1]) {
-                    // alow multidotted extensions
-                    filename += '.' + ext[1];
-                }
-                var basename = path.join(path.dirname(file.fullname), filename);
-
-                if (added[basename]) {
-                    return false;
-                }
-
-                added[basename] = true;
-
-                return true;
-            }).map(function (file) {
+            css = files.map(function (file) {
                 var url = path.relative(targetDir, file.fullname),
                     importState = _this.getImportState(file, url),
                     pre = '',
