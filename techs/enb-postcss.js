@@ -11,31 +11,16 @@ module.exports = buildFlow.create()
     .defineOption('parser')
     .defineOption('comments', false)
     .defineOption('sourcemap', false)
+    .defineOption('oneOfSourceSuffixes')
     .useFileList(['post.css', 'css'])
     .builder(function (files) {
         var _this = this,
             dirname = this.node.getDir(),
             filename = this.node.resolvePath(this._target),
             targetDir = path.dirname(filename),
-            added = {},
-            css = files.filter(function (file) { // keep just first of b1.post.css and b1.css
-                var filename = file.name.substring(0, file.name.indexOf('.')),
-                    ext = file.name.replace(filename, '').split('.').reverse();
-
-                if(ext[1]) {
-                    // alow multidotted extensions
-                    filename += '.' + ext[1];
-                }
-                var basename = path.join(path.dirname(file.fullname), filename);
-
-                if (added[basename]) {
-                    return false;
-                }
-
-                added[basename] = true;
-
-                return true;
-            }).map(function (file) {
+            css = (this._oneOfSourceSuffixes ?
+                filterByOneOfSourceSuffixes(files, this._oneOfSourceSuffixes) :
+                files).map(function (file) {
                 var url = path.relative(targetDir, file.fullname),
                     importState = _this.getImportState(file, url),
                     pre = '',
@@ -79,3 +64,32 @@ module.exports = buildFlow.create()
         }
     })
     .createTech();
+
+function filterByOneOfSourceSuffixes(files, rules) {
+    if (!rules) return files;
+
+    Array.isArray(rules) || (rules = [rules]);
+    rules.filter(Array.isArray).length || (rules = [rules]);
+
+    var added = rules.map(function () { return {}; });
+
+    return files.filter(function (file) {
+        var basename = path.join(path.dirname(file.fullname), file.name.substring(0, file.name.indexOf('.'))),
+            tech = file.fullname.replace(basename + '.', ''),
+            ruleIdx = rules.reduce(function (res, rule, idx) {
+                if (res > -1) return res;
+
+                return typeof rule === 'string' ?
+                    (rule === tech ? idx : -1) :
+                    rule.indexOf(tech) > -1 ? idx : -1;
+            }, -1);
+
+        if (ruleIdx === -1 || added[ruleIdx][basename]) {
+            return false;
+        }
+
+        added[ruleIdx][basename] = true;
+
+        return true;
+    });
+}
