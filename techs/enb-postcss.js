@@ -60,7 +60,8 @@ module.exports = buildFlow.create()
          * @return {string}
          */
         getImportState: function (file, relativePath) {
-            return '@import "' + relativePath + '";';
+            var EOL = (file.suffix === 'sss') ? '"' : ';"';
+            return '@import "' + relativePath + EOL;
         }
     })
     .createTech();
