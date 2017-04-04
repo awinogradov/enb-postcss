@@ -12,7 +12,7 @@ module.exports = buildFlow.create()
     .defineOption('comments', false)
     .defineOption('sourcemap', false)
     .defineOption('oneOfSourceSuffixes')
-    .useFileList(['post.css', 'css'])
+    .useFileList(['post.css', 'pcss', 'css'])
     .builder(function (files) {
         var _this = this,
             dirname = this.node.getDir(),
