@@ -12,7 +12,7 @@ nodeConfig.addTech(
         comments : true,
         sourcemap : true,
         plugins : [require('cssnext')()],
-        oneOfSourceSuffixes : [['post.css', 'css'], ['ie.post.css', 'ie.css']] // keep just one of found tech. Default is undefined
+        oneOfSourceSuffixes : [['post.css', 'pcss', 'css'], ['ie.post.css', 'ie.css']] // keep just one of found tech. Default is undefined
     } ],
 );
 ```
