@@ -10,8 +10,8 @@
     "css"
   ],
   "dependencies": {
-    "postcss": "^5.2.6",
-    "postcss-import": "^8.2.0",
+    "postcss": "^6.0.4",
+    "postcss-import": "^10.0.0",
     "vow": "^0.4.13"
   },
   "peerDependencies": {
