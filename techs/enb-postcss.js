@@ -14,7 +14,6 @@ module.exports = buildFlow.create()
     .useFileList(['post.css', 'css'])
     .builder(function (files) {
         var _this = this,
-            dirname = this.node.getDir(),
             filename = this.node.resolvePath(this._target),
             targetDir = path.dirname(filename),
             css = (this._oneOfSourceSuffixes ?
