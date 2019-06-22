@@ -1,5 +1,4 @@
-var vow       = require('vow'),
-    EOL       = require('os').EOL,
+var EOL       = require('os').EOL,
     path      = require('path'),
     postcss   = require('postcss'),
     buildFlow = require('enb').buildFlow || require('enb/lib/build-flow');
