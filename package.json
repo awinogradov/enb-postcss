@@ -9,12 +9,10 @@
     "postcss-runner",
     "css"
   ],
-  "dependencies": {
-    "postcss": "^6.0.4",
-    "postcss-import": "^10.0.0"
-  },
   "peerDependencies": {
-    "enb": ">=0.13.11 <2.0.0"
+    "enb": ">=0.13.11 <2.0.0",
+    "postcss": ">=6.0.4",
+    "postcss-import": ">=10.0.0"
   },
   "devDependencies": {
     "jscs": "^2.1.1",
