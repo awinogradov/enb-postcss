@@ -1,3 +1,6 @@
+* 3.0.0
+  * `postcss` and `postcss-import` are now peerDependencies
+
 * 0.1.0
   * use `CssSyntaxError` check
   * use async API
