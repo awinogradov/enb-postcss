@@ -3,7 +3,7 @@ enb-postcss
 
 Usage:
 ```bash
-npm i --save-dev enb-postcss
+npm i --save-dev postcss postcss-import enb-postcss
 ```
 
 ```js
